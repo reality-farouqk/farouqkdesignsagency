@@ -1,4 +1,4 @@
-# Farouqk Designs — Electrical Engineering Agency Site
+# Farouqk Designs — Local SEO Agency Site
 
 Next.js 16 (App Router) + TypeScript + Tailwind v4. Built for an agency
 positioning targeting electrical installation and engineering firms as
