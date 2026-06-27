@@ -6,14 +6,14 @@ const siteSettings = {
   title: 'Farouqk Electrical',
   tagline: 'Powering modern homes and businesses with reliable electrical solutions.',
   contactEmail: 'hello@farouqkelectrical.com',
-  phone: '+1 (555) 123-4567',
+  phone: '+2348107558507',
   address: '123 Main Street\nAnytown, USA 12345',
   heroHeadline: 'Electrical services designed for comfort, safety, and efficiency.',
   heroSubtext:
     'We deliver residential and commercial electrical systems with precision, care, and a focus on long-term reliability.',
   socialLinks: [
-    { _type: 'socialLink', platform: 'LinkedIn', url: 'https://linkedin.com/company/farouqk-electrical' },
-    { _type: 'socialLink', platform: 'Instagram', url: 'https://instagram.com/farouqk_electrical' },
+    { _type: 'socialLink', platform: 'LinkedIn', url: 'https://linkedin.com/company/farouqkdesigns' },
+    { _type: 'socialLink', platform: 'Instagram', url: 'https://instagram.com/farouqkdesigns' },
   ],
 }
 

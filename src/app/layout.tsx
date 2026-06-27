@@ -138,7 +138,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${plexSans.variable} ${plexMono.variable} ${inter.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${plexSans.variable} ${plexMono.variable} ${inter.variable} ${fraunces.variable} h-full antialiased data-scroll-behavior="smooth" `}
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <script
