@@ -5,20 +5,20 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "build": "sanity build",
-    "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy",
-    "dev": "sanity dev",
-    "start": "sanity start"
+    "build": "node --env-file=../.env.local ./node_modules/.bin/sanity build",
+    "deploy": "node --env-file=../.env.local ./node_modules/.bin/sanity deploy",
+    "deploy-graphql": "node --env-file=../.env.local ./node_modules/.bin/sanity graphql deploy",
+    "dev": "node --env-file=../.env.local ./node_modules/.bin/sanity dev",
+    "start": "node --env-file=../.env.local ./node_modules/.bin/sanity start"
   },
   "keywords": [
     "sanity"
   ],
   "dependencies": {
-    "@sanity/vision": "^6.1.0",
+    "@sanity/vision": "^6.2.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
-    "sanity": "^6.1.0",
+    "sanity": "^6.2.0",
     "styled-components": "^6.1.18"
   },
   "devDependencies": {

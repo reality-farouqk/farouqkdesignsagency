@@ -6,10 +6,12 @@ type Status = "idle" | "submitting" | "success" | "error";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("submitting");
+    setErrorMessage(null);
 
     const form = e.currentTarget;
     const data = {
@@ -20,6 +22,7 @@ export default function ContactForm() {
       phone: (form.elements.namedItem("phone") as HTMLInputElement).value,
       message: (form.elements.namedItem("message") as HTMLTextAreaElement)
         .value,
+      _gotcha: (form.elements.namedItem("_gotcha") as HTMLInputElement).value,
     };
 
     try {
@@ -28,11 +31,21 @@ export default function ContactForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) throw new Error("Request failed");
+      if (!res.ok) {
+        const body = (await res.json().catch(() => null)) as
+          | { error?: string }
+          | null;
+        throw new Error(body?.error || "Request failed");
+      }
       setStatus("success");
       form.reset();
-    } catch {
+    } catch (error) {
       setStatus("error");
+      setErrorMessage(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong sending your message."
+      );
     }
   }
 
@@ -62,6 +75,17 @@ export default function ContactForm() {
         <Field label="Phone / WhatsApp" name="phone" type="tel" />
       </div>
 
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="_gotcha">Leave blank</label>
+        <input
+          id="_gotcha"
+          name="_gotcha"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
       <div className="mt-5">
         <label
           htmlFor="message"
@@ -81,8 +105,8 @@ export default function ContactForm() {
 
       {status === "error" && (
         <p className="mt-4 text-[13.5px] text-red">
-          Something went wrong sending your message. Please try WhatsApp
-          instead, or try again.
+          {errorMessage ||
+            "Something went wrong sending your message. Please try WhatsApp instead, or try again."}
         </p>
       )}
 

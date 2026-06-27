@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono, Inter, Fraunces } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next"
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -138,7 +139,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${plexSans.variable} ${plexMono.variable} ${inter.variable} ${fraunces.variable} h-full antialiased data-scroll-behavior="smooth" `}
+      className={`${plexSans.variable} ${plexMono.variable} ${inter.variable} ${fraunces.variable} h-full antialiased data-scroll-behavior="smooth"`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <script
@@ -152,6 +154,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
+        <Analytics/>
       </body>
     </html>
   );

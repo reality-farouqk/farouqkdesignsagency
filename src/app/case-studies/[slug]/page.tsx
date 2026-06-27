@@ -56,6 +56,16 @@ export default async function CaseStudyPage({
           <h1 className="font-display font-semibold text-[clamp(1.9rem,4vw,2.9rem)] leading-[1.12] tracking-tight text-ink max-w-3xl">
             {cs.title}
           </h1>
+          {cs.website && (
+            <a
+              href={cs.website}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono mt-1.5 inline-block text-[12px] uppercase tracking-wide text-ink-3 hover:text-accent transition-colors"
+            >
+              See Website →
+            </a>
+          )}
         </div>
       </section>
 

@@ -29,6 +29,12 @@ export default defineType({
       type: 'string',
     }),
     defineField({
+      name: 'website',
+      title: 'Client website URL',
+      type: 'url',
+      validation: (Rule) => Rule.uri({scheme: ['http', 'https']}),
+    }),
+    defineField({
       name: 'projectDate',
       title: 'Project date',
       type: 'date',

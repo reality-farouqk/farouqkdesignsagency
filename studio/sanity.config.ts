@@ -7,8 +7,8 @@ export default defineConfig({
   name: 'default',
   title: 'Farouqk Electrical',
 
-  projectId: '48lk1atq',
-  dataset: 'production',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID!,
+  dataset: process.env.SANITY_STUDIO_DATASET!,
 
   plugins: [structureTool(), visionTool()],
 
