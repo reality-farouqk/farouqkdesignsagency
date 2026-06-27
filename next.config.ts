@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import path from "path";
 
 const nextConfig: NextConfig = {
+  turbopack: {},
   webpack: (config) => {
     const ignored = Array.isArray(config.watchOptions?.ignored)
       ? config.watchOptions.ignored
