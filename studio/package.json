@@ -1,5 +1,5 @@
 {
-  "name": "farouqk-electrical",
+  "name": "farouqk-designs-agency",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
@@ -9,7 +9,8 @@
     "deploy": "node --env-file=../.env.local ./node_modules/.bin/sanity deploy",
     "deploy-graphql": "node --env-file=../.env.local ./node_modules/.bin/sanity graphql deploy",
     "dev": "node --env-file=../.env.local ./node_modules/.bin/sanity dev",
-    "start": "node --env-file=../.env.local ./node_modules/.bin/sanity start"
+    "start": "node --env-file=../.env.local ./node_modules/.bin/sanity start",
+    "seed": "node --env-file=../.env.local ./node_modules/.bin/sanity exec seed.ts --with-user-token"
   },
   "keywords": [
     "sanity"

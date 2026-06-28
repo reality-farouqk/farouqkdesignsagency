@@ -3,12 +3,14 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import FinalCta from "@/components/FinalCta";
 import { getCaseStudies } from "@/lib/sanity";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Case Studies for Service Brands | Farouqk Designs",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Case Studies for Home Service Businesses",
   description:
-    "See how we improve visibility, trust, and conversion for service businesses with custom websites and SEO.",
-};
+    "See how custom websites and local SEO improved visibility, trust, and inbound enquiries for service businesses.",
+  path: "/case-studies",
+});
 
 export default async function CaseStudiesPage() {
   const caseStudies = await getCaseStudies();

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import FinalCta from "@/components/FinalCta";
 import { getCaseStudyBySlug, getCaseStudies, type CaseStudyPreview } from "@/lib/sanity";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const caseStudies = await getCaseStudies();
@@ -10,12 +11,6 @@ export async function generateStaticParams() {
     .filter((cs): cs is CaseStudyPreview => typeof cs.slug === "string")
     .map((cs) => ({ slug: cs.slug }));
 }
-
-const limitMeta = (value: string, max: number) => {
-  const clean = value.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  return `${clean.slice(0, max - 1).trimEnd()}…`;
-};
 
 export async function generateMetadata({
   params,
@@ -25,10 +20,14 @@ export async function generateMetadata({
   const { slug } = await params;
   const cs = await getCaseStudyBySlug(slug);
   if (!cs) return {};
-  return {
-    title: limitMeta(`${cs.title} | Farouqk Designs`, 55),
-    description: limitMeta(cs.summary ?? "A case study showing how custom websites and SEO can improve trust and conversion.", 155),
-  };
+
+  return buildPageMetadata({
+    title: cs.title,
+    description:
+      cs.summary ??
+      "A case study showing how custom websites and SEO can improve trust and conversion.",
+    path: `/case-studies/${slug}`,
+  });
 }
 
 export default async function CaseStudyPage({
@@ -61,7 +60,7 @@ export default async function CaseStudyPage({
               href={cs.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono mt-1.5 inline-block text-[12px] uppercase tracking-wide text-ink-3 hover:text-accent transition-colors"
+              className="font-mono mt-4 inline-flex items-center gap-2 text-[12px] uppercase tracking-wide text-accent hover:underline underline-offset-4 transition-colors"
             >
               See Website →
             </a>

@@ -1,11 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { getIndustries } from "@/lib/sanity";
-import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Websites for Home Service Industries | Farouqk Designs",
-  description: "Custom websites and local SEO for electricians, plumbers, HVAC, renovation, and interior design businesses.",
-};
+export const metadata: Metadata = buildPageMetadata({
+  title: "Websites for Electricians, Plumbers, HVAC & Trades",
+  description:
+    "Industry-specific websites and local SEO for electricians, plumbers, HVAC, renovation contractors, and interior designers.",
+  path: "/industries",
+});
 
 const FALLBACK_INDUSTRIES = [
   { slug: "electrical", title: "Electrical", eyebrow: "For Electricians", heroSubheadline: "Websites that make homeowners call you first." },

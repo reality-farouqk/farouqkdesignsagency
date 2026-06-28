@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import FinalCta from "@/components/FinalCta";
 import { getBlogPostBySlug, getBlogPosts, type BlogPost } from "@/lib/sanity";
+import { buildArticleSchema, buildPageMetadata } from "@/lib/seo";
 
 export async function generateStaticParams() {
   const blogPosts = await getBlogPosts();
@@ -10,12 +11,6 @@ export async function generateStaticParams() {
     .filter((post): post is BlogPost => typeof post.slug === "string")
     .map((post) => ({ slug: post.slug }));
 }
-
-const limitMeta = (value: string, max: number) => {
-  const clean = value.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  return `${clean.slice(0, max - 1).trimEnd()}…`;
-};
 
 export async function generateMetadata({
   params,
@@ -25,10 +20,16 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getBlogPostBySlug(slug);
   if (!post) return {};
-  return {
-    title: limitMeta(`${post.title} | Farouqk Designs`, 55),
-    description: limitMeta(post.excerpt ?? "Practical insights on web design, local SEO, and growth for service businesses.", 155),
-  };
+
+  return buildPageMetadata({
+    title: post.title,
+    description:
+      post.excerpt ??
+      "Practical insights on web design, local SEO, and growth for service businesses.",
+    path: `/blog/${slug}`,
+    type: "article",
+    publishedTime: post.date,
+  });
 }
 
 function formatDate(dateString: string) {
@@ -48,8 +49,21 @@ export default async function BlogPostPage({
   const post = await getBlogPostBySlug(slug);
   if (!post) notFound();
 
+  const articleSchema = buildArticleSchema({
+    title: post.title,
+    description:
+      post.excerpt ??
+      "Practical insights on web design, local SEO, and growth for service businesses.",
+    path: `/blog/${slug}`,
+    datePublished: post.date,
+  });
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
       <section className="border-b border-line bg-bg-sunken">
         <div className="container-grid py-16 md:py-20">
           <Link

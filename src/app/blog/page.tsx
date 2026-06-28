@@ -3,12 +3,14 @@ import Link from "next/link";
 import PageHeader from "@/components/PageHeader";
 import FinalCta from "@/components/FinalCta";
 import { getBlogPosts } from "@/lib/sanity";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Insights on Web Design & SEO | Farouqk Designs",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Web Design & Local SEO Insights",
   description:
-    "Read practical advice on web design, local SEO, trust-building, and growth for service businesses.",
-};
+    "Practical articles on web design, local SEO, credibility, and growth for electricians, plumbers, HVAC, and home service businesses.",
+  path: "/blog",
+});
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString("en-US", {

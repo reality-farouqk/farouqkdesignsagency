@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans, IBM_Plex_Mono, Inter, Fraunces } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_KEYWORDS,
+  DEFAULT_TITLE,
+  SITE_NAME,
+  SITE_URL,
+  organizationSchema,
+  professionalServiceSchema,
+} from "@/lib/seo";
 
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
@@ -29,35 +38,21 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
 });
 
-const siteUrl = "https://www.farouqkdesigns.com";
-const siteName = "Farouqk Designs";
-const defaultTitle = "Growth plan for local businesses | Farouqk Designs";
-const defaultDescription =
-  "We make it easy for local businesses to attract more customers and grow their revenue. We build to drive leads and growth.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: defaultTitle,
-    template: `%s | ${siteName}`,
+    default: DEFAULT_TITLE,
+    template: `%s | ${SITE_NAME}`,
   },
-  description: defaultDescription,
-  keywords: [
-    "web design",
-    "local SEO",
-    "home service marketing",
-    "plumber website",
-    "HVAC website",
-    "electrician website",
-    "renovation contractor website",
-  ],
+  description: DEFAULT_DESCRIPTION,
+  keywords: [...DEFAULT_KEYWORDS],
   alternates: {
-    canonical: siteUrl,
+    canonical: SITE_URL,
   },
-  applicationName: siteName,
-  authors: [{ name: siteName, url: siteUrl }],
-  creator: siteName,
-  publisher: siteName,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
@@ -75,10 +70,10 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: defaultTitle,
-    description: defaultDescription,
-    url: siteUrl,
-    siteName,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
     type: "website",
     locale: "en_US",
     images: [
@@ -86,18 +81,18 @@ export const metadata: Metadata = {
         url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: `${siteName} logo`,
+        alt: `${SITE_NAME} logo`,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: defaultTitle,
-    description: defaultDescription,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
     images: [
       {
         url: "/logo.png",
-        alt: `${siteName} logo`,
+        alt: `${SITE_NAME} logo`,
       },
     ],
   },
@@ -109,30 +104,6 @@ export const metadata: Metadata = {
     apple: [{ url: "/logo.png", type: "image/png", sizes: "180x180" }],
   },
   manifest: "/site.webmanifest",
-};
-
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: siteName,
-  url: siteUrl,
-  logo: `${siteUrl}/logo.png`,
-  sameAs: [
-    "https://www.linkedin.com/in/farouqkdesigns",
-    "https://www.instagram.com/farouqkdesigns",
-  ],
-};
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: siteName,
-  url: siteUrl,
-  potentialAction: {
-    "@type": "SearchAction",
-    target: `${siteUrl}/?s={search_term_string}`,
-    "query-input": "required name=search_term_string",
-  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -149,12 +120,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <Analytics/>
+        <Analytics />
       </body>
     </html>
   );

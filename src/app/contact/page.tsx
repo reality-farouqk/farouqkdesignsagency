@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
 import PageHeader from "@/components/PageHeader";
 import ContactForm from "@/components/ContactForm";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Book a Call for Your Website | Farouqk Designs",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Book a Free Website & SEO Audit",
   description:
-    "Let’s talk about your web design, SEO, and lead generation goals for your business.",
-};
+    "Contact Farouqk Designs for web design, local SEO, and lead generation. Tell us about your business and get a reply within one business day.",
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (

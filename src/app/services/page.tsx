@@ -4,12 +4,14 @@ import ServicesDetail from "@/components/ServicesDetail";
 import Deliverables from "@/components/Deliverables";
 import Process from "@/components/Process";
 import FinalCta from "@/components/FinalCta";
+import { buildPageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Web Design & SEO for Service Brands | Farouqk Designs",
+export const metadata: Metadata = buildPageMetadata({
+  title: "Web Design, Local SEO & Lead Generation Services",
   description:
-    "Custom web design, local SEO, and lead generation for service businesses that want more calls, bookings, and qualified enquiries.",
-};
+    "Custom websites, service pages, local SEO, AI SEO, Google Business setup, and lead capture for home service businesses that want more calls and booked jobs.",
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

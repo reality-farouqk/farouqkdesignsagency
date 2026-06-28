@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getIndustryBySlug, getIndustries } from "@/lib/sanity";
 import type { Metadata } from "next";
+import { buildPageMetadata } from "@/lib/seo";
 
 // Static fallback data so pages render even before CMS content is added
 const FALLBACKS: Record<string, {
@@ -75,34 +76,31 @@ const FALLBACKS: Record<string, {
 
 type Props = { params: Promise<{ slug: string }> };
 
-const limitMeta = (value: string, max: number) => {
-  const clean = value.replace(/\s+/g, " ").trim();
-  if (clean.length <= max) return clean;
-  return `${clean.slice(0, max - 1).trimEnd()}…`;
-};
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const industry = await getIndustryBySlug(slug).catch(() => null);
   const fb = FALLBACKS[slug];
   const titleMap: Record<string, string> = {
-    electrical: "Electrician Websites | Farouqk Designs",
-    plumbing: "Plumber Websites | Farouqk Designs",
-    hvac: "HVAC Websites | Farouqk Designs",
-    renovation: "Renovation Websites | Farouqk Designs",
-    "interior-design": "Interior Design Websites | Farouqk Designs",
+    electrical: "Electrician Website Design & Local SEO",
+    plumbing: "Plumber Website Design & Local SEO",
+    hvac: "HVAC Website Design & Local SEO",
+    renovation: "Renovation Contractor Website Design",
+    "interior-design": "Interior Design Website & Portfolio",
   };
-  const title = limitMeta(
-    industry?.seoTitle ?? (fb ? titleMap[slug] ?? `${fb.eyebrow} Websites | Farouqk Designs` : "Industry Websites | Farouqk Designs"),
-    55,
-  );
-  const description = limitMeta(
-    industry?.seoDescription ?? (fb
-      ? `Custom websites and local SEO for ${slug.replace(/-/g, " ")}${slug === "interior-design" ? " businesses" : " services"}.`
-      : "Custom websites and local SEO for growing service businesses."),
-    155,
-  );
-  return { title, description };
+
+  if (!industry && !fb) return {};
+
+  return buildPageMetadata({
+    title:
+      industry?.seoTitle?.replace(/\s*\|\s*Farouqk Designs\s*$/i, "") ??
+      (fb ? titleMap[slug] ?? `${fb.eyebrow} Websites` : "Industry Websites"),
+    description:
+      industry?.seoDescription ??
+      (fb
+        ? `Custom websites and local SEO for ${slug.replace(/-/g, " ")}${slug === "interior-design" ? " businesses" : " services"}. Rank locally and convert more enquiries.`
+        : "Custom websites and local SEO for growing service businesses."),
+    path: `/industries/${slug}`,
+  });
 }
 
 export async function generateStaticParams() {
