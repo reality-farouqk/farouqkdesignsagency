@@ -26,7 +26,7 @@ export default function ContactPage() {
               <p className="eyebrow text-accent mb-4">Direct Contact</p>
               <div className="border border-line rounded-lg overflow-hidden divide-y divide-line bg-bg-raised">
                 <a
-                  href="mailto:umar@farouqkdesigns.com"
+                  href="mailto:hello@farouqkdesigns.com"
                   className="flex items-center justify-between p-5 hover:bg-bg-sunken transition-colors"
                 >
                   <span className="text-[14.5px] text-ink">Email</span>
