@@ -16,7 +16,7 @@ import { buildFaqSchema, buildPageMetadata } from "@/lib/seo";
 export const metadata: Metadata = buildPageMetadata({
   title: "Web Design & Local SEO for Home Service Businesses",
   description:
-    "We build high-converting websites for electricians, plumbers, HVAC companies, and renovation contractors — designed to rank locally and book jobs while you sleep.",
+    "We help home service businesses win more customers, book more jobs, and grow faster with strategic digital solutions.",
   path: "/",
 });
 
