@@ -22,4 +22,14 @@ export const homeFaq = [
     question: "Do you also write the content?",
     answer: "Yes. We handle both design and messaging from start to finish.",
   },
+  {
+    question: "What is the difference between a professional website and a Google Business Profile?",
+    answer:
+      "A Google Business Profile lists you on Google Maps for local searches, but a professional website holds your complete capability statement, portfolio, services detail, and case studies to convert searchers into commercial projects and contracts.",
+  },
+  {
+    question: "How does Local SEO help my contracting business get more jobs?",
+    answer:
+      "Local SEO optimizes your website so that when homeowners or commercial clients search for services like 'plumber near me' or 'electrical contractor in Lagos', your business appears at the top of the search results, driving direct calls and enquiries.",
+  },
 ] as const;

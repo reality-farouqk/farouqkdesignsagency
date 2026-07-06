@@ -12,6 +12,14 @@ export const metadata: Metadata = buildPageMetadata({
   path: "/case-studies",
 });
 
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export default async function CaseStudiesPage() {
   const caseStudies = await getCaseStudies();
 
@@ -32,9 +40,19 @@ export default async function CaseStudiesPage() {
                 href={`/case-studies/${cs.slug}`}
                 className="group bg-bg-raised p-8 hover:bg-bg-sunken transition-colors"
               >
-                <p className="font-mono text-[11.5px] uppercase tracking-wide text-ink-3 mb-6">
-                  {cs.projectType ?? cs.clientName ?? "Case Study"}
-                </p>
+                <div className="flex items-center gap-3 mb-6">
+                  <p className="font-mono text-[11.5px] uppercase tracking-wide text-accent font-semibold">
+                    {cs.projectType ?? cs.clientName ?? "Case Study"}
+                  </p>
+                  {cs.projectDate && (
+                    <>
+                      <span className="w-1 h-1 rounded-full bg-line animate-pulse" />
+                      <p className="font-mono text-[11.5px] text-ink-3">
+                        Last updated: {formatDate(cs.projectDate)}
+                      </p>
+                    </>
+                  )}
+                </div>
                 <h2 className="font-display font-semibold text-[20px] text-ink mb-4 leading-snug">
                   {cs.title}
                 </h2>

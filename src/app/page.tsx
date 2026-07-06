@@ -11,7 +11,7 @@ import FaqSection from "@/components/FaqSection";
 import FinalCta from "@/components/FinalCta";
 import { homeFaq } from "@/lib/faq-data";
 import { getCaseStudies, getServices } from "@/lib/sanity";
-import { buildFaqSchema, buildPageMetadata } from "@/lib/seo";
+import { buildFaqSchema, buildPageMetadata, professionalServiceSchema } from "@/lib/seo";
 
 export const metadata: Metadata = buildPageMetadata({
   title: "Web Design & Local SEO for Home Service Businesses",
@@ -28,6 +28,10 @@ export default async function Home() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

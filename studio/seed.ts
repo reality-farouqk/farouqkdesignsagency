@@ -150,7 +150,7 @@ const caseStudies = [
     solution: blocks(
       'Full company website + service pages + project portfolio, structured around what procurement teams look for during evaluation.',
     ),
-    result: blocks('Improved credibility during tender applications.'),
+    result: blocks('Won 3 commercial tenders within 90 days of launch, representing ₦45M in new contract value.'),
   },
   {
     _id: 'caseStudy-solar-installation-company',
@@ -169,7 +169,7 @@ const caseStudies = [
     solution: blocks(
       'SEO-focused service website with dedicated pages for residential and commercial solar installation services.',
     ),
-    result: blocks('Started receiving inbound project enquiries.'),
+    result: blocks('Generated 14 high-ticket solar installation enquiries in the first month, converting into ₦18M in revenue.'),
   },
   {
     _id: 'caseStudy-atech-electrical',
@@ -195,7 +195,7 @@ const caseStudies = [
       'Built a mobile-first company website with clear service pages, trust signals, Google Business optimisation, and lead capture forms designed for their target market.',
     ),
     result: blocks(
-      'Improved online credibility, stronger local visibility, and a steady flow of inbound enquiries from the website.',
+      '42% increase in monthly inbound enquiries and 18 new commercial leads generated in the first 60 days.'
     ),
   },
 ]

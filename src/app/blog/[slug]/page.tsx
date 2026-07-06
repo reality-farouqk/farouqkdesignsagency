@@ -77,7 +77,7 @@ export default async function BlogPostPage({
             <p className="eyebrow text-accent">{post.category}</p>
             <span className="w-1 h-1 rounded-full bg-line" />
             <p className="font-mono text-[11px] text-ink-3">
-              {formatDate(post.date ?? new Date().toISOString())}
+              Last updated: {formatDate(post.date ?? new Date().toISOString())}
             </p>
             <span className="w-1 h-1 rounded-full bg-line" />
             <p className="font-mono text-[11px] text-ink-3">

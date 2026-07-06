@@ -30,6 +30,14 @@ export async function generateMetadata({
   });
 }
 
+function formatDate(dateString: string) {
+  return new Date(dateString).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
 export default async function CaseStudyPage({
   params,
 }: {
@@ -49,9 +57,17 @@ export default async function CaseStudyPage({
           >
             ← All Case Studies
           </Link>
-          <p className="eyebrow text-accent mt-8 mb-5">
-            {cs.projectType ?? cs.clientName ?? "Case Study"}
-          </p>
+          <div className="flex items-center gap-4 mt-8 mb-5">
+            <p className="eyebrow text-accent">{cs.projectType ?? cs.clientName ?? "Case Study"}</p>
+            {cs.projectDate && (
+              <>
+                <span className="w-1 h-1 rounded-full bg-line" />
+                <p className="font-mono text-[11px] text-ink-3">
+                  Last updated: {formatDate(cs.projectDate)}
+                </p>
+              </>
+            )}
+          </div>
           <h1 className="font-display font-semibold text-[clamp(1.9rem,4vw,2.9rem)] leading-[1.12] tracking-tight text-ink max-w-3xl">
             {cs.title}
           </h1>

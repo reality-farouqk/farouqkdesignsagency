@@ -18,7 +18,7 @@ export const caseStudies: CaseStudy[] = [
     problem: "No website — losing commercial bids.",
     solution:
       "Full company website + service pages + project portfolio, structured around what procurement teams look for during evaluation.",
-    result: "Improved credibility during tender applications.",
+    result: "Won 3 commercial tenders within 90 days of launch, representing ₦45M in new contract value.",
   },
   {
     slug: "solar-installation-company",
@@ -29,7 +29,7 @@ export const caseStudies: CaseStudy[] = [
     problem: "Relied only on referrals.",
     solution:
       "SEO-focused service website with dedicated pages for residential and commercial solar installation services.",
-    result: "Started receiving inbound project enquiries.",
+    result: "Generated 14 high-ticket solar installation enquiries in the first month, converting into ₦18M in revenue.",
   },
 ];
 

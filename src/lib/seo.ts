@@ -111,23 +111,51 @@ export const professionalServiceSchema = {
   "@type": "ProfessionalService",
   name: SITE_NAME,
   url: SITE_URL,
+  logo: `${SITE_URL}/logo.png`,
   image: `${SITE_URL}/logo.png`,
   email: "hello@farouqkdesigns.com",
   telephone: "+2348107558507",
-  description: DEFAULT_DESCRIPTION,
+  description: "Farouqk Designs builds high-converting websites and local SEO systems for home service businesses — electricians, plumbers, HVAC companies, and renovation contractors.",
   areaServed: {
     "@type": "Country",
-    name: "Worldwide",
+    name: "Nigeria",
   },
-  serviceType: [
-    "Web Design",
-    "Local SEO",
-    "AI SEO",
-    "Lead Generation",
-    "Google Business Profile Setup",
+  sameAs: [
+    "https://wa.me/+2348107558507"
   ],
-  priceRange: "$$",
+  makesOffer: [
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Design for Home Service Businesses" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Local SEO" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI SEO / Answer Engine Optimization" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI-Powered Lead Generation" } },
+    { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Business Profile Optimization" } }
+  ]
 };
+
+export function buildIndustryServiceSchema({
+  serviceType,
+  description,
+}: {
+  serviceType: string;
+  description: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType,
+    provider: {
+      "@type": "ProfessionalService",
+      name: SITE_NAME,
+      url: SITE_URL,
+      logo: `${SITE_URL}/logo.png`,
+    },
+    areaServed: {
+      "@type": "Country",
+      name: "Nigeria",
+    },
+    description,
+  };
+}
 
 export function buildFaqSchema(
   items: ReadonlyArray<{ question: string; answer: string }>

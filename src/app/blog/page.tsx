@@ -45,7 +45,7 @@ export default async function BlogIndexPage() {
                     {post.category}
                   </p>
                   <p className="font-mono text-[11.5px] text-ink-3 mt-1">
-                    {formatDate(post.date ?? new Date().toISOString())}
+                    Last updated: {formatDate(post.date ?? new Date().toISOString())}
                   </p>
                 </div>
                 <div className="flex-1">

@@ -16,6 +16,7 @@ export type CaseStudyPreview = {
   summary?: string
   result?: string
   website?: string
+  projectDate?: string
 }
 
 export type CaseStudy = CaseStudyPreview & {
@@ -44,8 +45,8 @@ const client = createClient({
 })
 
 const servicesQuery = `*[_type == "service"] | order(order asc){_id,title,"slug":slug.current,shortDescription}`
-const caseStudiesQuery = `*[_type == "caseStudy"] | order(projectDate desc){_id,title,projectType,clientName,"summary":excerpt,"result": pt::text(result),"slug":slug.current,website}`
-const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0]{_id,title,projectType,clientName,"summary":excerpt,"result": pt::text(result),challenge,solution,"slug":slug.current,website}`
+const caseStudiesQuery = `*[_type == "caseStudy"] | order(projectDate desc){_id,title,projectType,clientName,"summary":excerpt,"result": pt::text(result),"slug":slug.current,website,projectDate}`
+const caseStudyBySlugQuery = `*[_type == "caseStudy" && slug.current == $slug][0]{_id,title,projectType,clientName,"summary":excerpt,"result": pt::text(result),challenge,solution,"slug":slug.current,website,projectDate}`
 const blogPostsQuery = `*[_type == "blogPost"] | order(publishedAt desc){_id,title,excerpt,category,"date":publishedAt,readTime,"slug":slug.current,"content": content[].children[0].text}`
 const blogPostBySlugQuery = `*[_type == "blogPost" && slug.current == $slug][0]{_id,title,excerpt,category,"date":publishedAt,readTime,"slug":slug.current,"content": content[].children[0].text}`
 

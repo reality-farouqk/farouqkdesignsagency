@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getIndustryBySlug, getIndustries } from "@/lib/sanity";
 import type { Metadata } from "next";
-import { buildPageMetadata } from "@/lib/seo";
+import { buildIndustryServiceSchema, buildPageMetadata } from "@/lib/seo";
 
 // Static fallback data so pages render even before CMS content is added
 const FALLBACKS: Record<string, {
@@ -125,8 +125,43 @@ export default async function IndustryPage({ params }: Props) {
   const painPoints    = cms?.painPoints     ?? fb.painPoints;
   const testimonial   = cms?.testimonial;
 
+  const serviceTypeMap: Record<string, string> = {
+    electrical: "Website Design for Electricians",
+    plumbing: "Website Design for Plumbers",
+    hvac: "Website Design for HVAC Companies",
+    renovation: "Website Design for Renovation Contractors",
+    "interior-design": "Website Design for Interior Designers",
+  };
+  const serviceType = serviceTypeMap[slug] ?? `Website Design for ${cms?.title ?? slug} Businesses`;
+
+  const descMap: Record<string, string> = {
+    electrical: "Website design, local SEO, and lead generation systems built specifically for electrical contractors in Nigeria.",
+    plumbing: "Website design, local SEO, and lead generation systems built specifically for plumbing contractors in Nigeria.",
+    hvac: "Website design, local SEO, and lead generation systems built specifically for HVAC contractors and service companies in Nigeria.",
+    renovation: "Website design, local SEO, and lead generation systems built specifically for renovation contractors and home builders in Nigeria.",
+    "interior-design": "Website design, local SEO, and portfolio systems built specifically for interior designers and decorators in Nigeria.",
+  };
+  const description = cms?.seoDescription ?? descMap[slug] ?? `Website design, local SEO, and lead generation systems built specifically for ${slug} businesses in Nigeria.`;
+
+  const serviceSchema = buildIndustryServiceSchema({ serviceType, description });
+
+  const industryNames: Record<string, string> = {
+    electrical: "electricians",
+    plumbing: "plumbers",
+    hvac: "HVAC companies",
+    renovation: "renovation contractors",
+    "interior-design": "interior designers",
+  };
+  const targetName = industryNames[slug] ?? `${cms?.title ?? slug} businesses`;
+  const directAnswer = `Farouqk Designs builds websites and local SEO systems for ${targetName} in Nigeria, designed to turn homeowner searches into booked jobs.`;
+  const fullHeroSub = `${directAnswer} ${heroSub}`;
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       {/* Hero */}
       <section style={{ borderBottom: "1px solid var(--line)", background: "var(--bg)" }}>
         <div className="wrap" style={{ paddingBlock: "5rem" }}>
@@ -135,7 +170,7 @@ export default async function IndustryPage({ params }: Props) {
             {heroHeadline}
           </h1>
           <p style={{ marginTop: "1.25rem", fontSize: 18, lineHeight: 1.7, color: "var(--ink-2)", maxWidth: "32rem" }}>
-            {heroSub}
+            {fullHeroSub}
           </p>
           <div style={{ marginTop: "2rem", display: "flex", flexWrap: "wrap", gap: "0.75rem" }}>
             <Link
