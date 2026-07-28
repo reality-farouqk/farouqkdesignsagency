@@ -14,6 +14,7 @@ import {
   organizationSchema,
   professionalServiceSchema,
 } from "@/lib/seo";
+import Script from "next/script";
 
 const plexSans = IBM_Plex_Sans({
   variable: "--font-plex-sans",
@@ -114,6 +115,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${plexSans.variable} ${plexMono.variable} ${inter.variable} ${fraunces.variable} h-full antialiased data-scroll-behavior="smooth"`}
       suppressHydrationWarning
     >
+      <head>
+                {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-S48SW6XPQV"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-S48SW6XPQV');
+          `}
+        </Script>
+      </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <script
           type="application/ld+json"
