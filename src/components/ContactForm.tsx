@@ -1,12 +1,36 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useRef, useState, FormEvent } from "react";
+import { trackEvent } from "@/lib/gtag";
 
 type Status = "idle" | "submitting" | "success" | "error";
+
+const FORM_NAME = "contact";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  // Guards against firing multiple validation_error events for a single
+  // submit click when several fields are invalid at once.
+  const invalidFiredRef = useRef(false);
+
+  // Fires once per submit click, before native HTML5 validation runs.
+  // If validation fails, the browser blocks the submit event, so this is
+  // the only reliable place to log "the user tried to submit."
+  function handleSubmitAttemptClick() {
+    invalidFiredRef.current = false;
+    trackEvent("form_submit_attempt", { form_name: FORM_NAME });
+  }
+
+  // Native validation failure (empty required field, bad email format, etc).
+  // The `invalid` event doesn't bubble, so it's caught here via the
+  // capture-phase handler on the <form>. Multiple fields can fire at once;
+  // the ref ensures we only log one event per attempt.
+  function handleInvalidCapture() {
+    if (invalidFiredRef.current) return;
+    invalidFiredRef.current = true;
+    trackEvent("form_submit_invalid", { form_name: FORM_NAME });
+  }
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -38,14 +62,22 @@ export default function ContactForm() {
         throw new Error(body?.error || "Request failed");
       }
       setStatus("success");
+      trackEvent("form_submit_success", { form_name: FORM_NAME });
+      // Standard GA4 recommended event for lead-gen forms — makes this
+      // usable directly as a conversion in GA4 without extra config.
+      trackEvent("generate_lead", { form_name: FORM_NAME });
       form.reset();
     } catch (error) {
-      setStatus("error");
-      setErrorMessage(
+      const message =
         error instanceof Error
           ? error.message
-          : "Something went wrong sending your message."
-      );
+          : "Something went wrong sending your message.";
+      setStatus("error");
+      setErrorMessage(message);
+      trackEvent("form_submit_error", {
+        form_name: FORM_NAME,
+        error_message: message,
+      });
     }
   }
 
@@ -67,7 +99,11 @@ export default function ContactForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="border border-line rounded-lg bg-bg-raised p-7 md:p-8">
+    <form
+      onSubmit={handleSubmit}
+      onInvalidCapture={handleInvalidCapture}
+      className="border border-line rounded-lg bg-bg-raised p-7 md:p-8"
+    >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <Field label="Full Name" name="name" required />
         <Field label="Company Name" name="company" required />
@@ -112,6 +148,7 @@ export default function ContactForm() {
 
       <button
         type="submit"
+        onClick={handleSubmitAttemptClick}
         disabled={status === "submitting"}
         className="mt-6 inline-flex items-center justify-center gap-2 bg-ink text-bg px-7 py-3.5 text-[14px] font-mono uppercase tracking-wide hover:bg-accent hover:text-white transition-colors disabled:opacity-60 w-full sm:w-auto"
       >
