@@ -129,6 +129,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-S48SW6XPQV');
           `}
         </Script>
+        <meta name="msvalidate.01" content="138BC50D9B685943C9CEED622D70AE74" />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <script
