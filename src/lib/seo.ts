@@ -77,10 +77,10 @@ export function buildPageMetadata({
       ...(publishedTime ? { publishedTime } : {}),
       images: [
         {
-          url: "/logo.png",
+          url: "/og-image.png",
           width: 1200,
           height: 630,
-          alt: `${SITE_NAME} logo`,
+          alt: `${SITE_NAME} — Web Design & Local SEO for Home Service Businesses`,
         },
       ],
     },
@@ -88,7 +88,7 @@ export function buildPageMetadata({
       card: "summary_large_image",
       title: safeTitle,
       description: safeDescription,
-      images: [{ url: "/logo.png", alt: `${SITE_NAME} logo` }],
+      images: [{ url: "/og-image.png", alt: `${SITE_NAME} — Web Design & Local SEO for Home Service Businesses` }],
     },
   };
 }

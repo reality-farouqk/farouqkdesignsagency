@@ -80,10 +80,10 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/logo.png",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: `${SITE_NAME} logo`,
+        alt: `${SITE_NAME} — Web Design & Local SEO for Home Service Businesses`,
       },
     ],
   },
@@ -93,8 +93,8 @@ export const metadata: Metadata = {
     description: DEFAULT_DESCRIPTION,
     images: [
       {
-        url: "/logo.png",
-        alt: `${SITE_NAME} logo`,
+        url: "/og-image.png",
+        alt: `${SITE_NAME} — Web Design & Local SEO for Home Service Businesses`,
       },
     ],
   },
@@ -129,7 +129,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-S48SW6XPQV');
           `}
         </Script>
-        <meta name="msvalidate.01" content="138BC50D9B685943C9CEED622D70AE74" />
       </head>
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
         <script

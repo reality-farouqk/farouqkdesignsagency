@@ -1,0 +1,31 @@
+# Farouqk Designs
+
+> Web design, local SEO, and lead generation for home service businesses —
+> electricians, plumbers, HVAC companies, renovation contractors, and interior
+> designers. We build websites and SEO systems designed to convert local search
+> traffic into booked jobs.
+
+Farouqk Designs serves home service and trades businesses, primarily in
+Nigeria. Core services: website design and development, local SEO, AI SEO /
+answer engine optimization, Google Business Profile optimization, and
+AI-powered lead generation.
+
+## Services
+- [Services overview](https://www.farouqkdesigns.com/services): Full breakdown of website design, local SEO, and lead generation offerings.
+
+## Industries served
+- [Industries overview](https://www.farouqkdesigns.com/industries): Electrical, plumbing, HVAC, renovation, and interior design.
+- [Electrical](https://www.farouqkdesigns.com/industries/electrical)
+- [Plumbing](https://www.farouqkdesigns.com/industries/plumbing)
+- [HVAC](https://www.farouqkdesigns.com/industries/hvac)
+- [Renovation](https://www.farouqkdesigns.com/industries/renovation)
+- [Interior Design](https://www.farouqkdesigns.com/industries/interior-design)
+
+## Proof of work
+- [Case studies](https://www.farouqkdesigns.com/case-studies): Real client results and before/after outcomes.
+
+## Resources
+- [Blog](https://www.farouqkdesigns.com/blog): Articles on web design, local SEO, and marketing for home service businesses.
+
+## Contact
+- [Contact / get a quote](https://www.farouqkdesigns.com/contact)
